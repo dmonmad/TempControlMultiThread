@@ -147,13 +147,28 @@ public class JFMain extends javax.swing.JFrame {
         });
 
         friomenosprioridad.setText("-");
+        friomenosprioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                friomenosprioridadActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Prioridad:");
 
         calormasprioridad.setText("+");
+        calormasprioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calormasprioridadActionPerformed(evt);
+            }
+        });
 
         calormenosprioridad.setText("-");
+        calormenosprioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calormenosprioridadActionPerformed(evt);
+            }
+        });
 
         frioprioritylabel.setText("jLabel9");
 
@@ -348,11 +363,36 @@ public class JFMain extends javax.swing.JFrame {
 
     private void friomasprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friomasprioridadActionPerformed
         if(Integer.parseInt(frioprioritylabel.getText()) < 10){
-            
-            hilocalor.setPriority(Integer.parseInt(frioprioritylabel.getText()));
+            int priority = Integer.parseInt(frioprioritylabel.getText());
+            frioprioritylabel.setText(Integer.toString(priority+1));
+            hilofrio.setPriority(priority+1);
         }
         
     }//GEN-LAST:event_friomasprioridadActionPerformed
+
+    private void friomenosprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friomenosprioridadActionPerformed
+        if(Integer.parseInt(frioprioritylabel.getText()) > 0){
+            int priority = Integer.parseInt(frioprioritylabel.getText());
+            frioprioritylabel.setText(Integer.toString(priority-1));
+            hilofrio.setPriority(priority-1);
+        }
+    }//GEN-LAST:event_friomenosprioridadActionPerformed
+
+    private void calormasprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calormasprioridadActionPerformed
+        if(Integer.parseInt(calorprioritylabel.getText()) < 10){
+            int priority = Integer.parseInt(calorprioritylabel.getText());
+            calorprioritylabel.setText(Integer.toString(priority+1));
+            hilocalor.setPriority(priority+1);
+        }
+    }//GEN-LAST:event_calormasprioridadActionPerformed
+
+    private void calormenosprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calormenosprioridadActionPerformed
+        if(Integer.parseInt(calorprioritylabel.getText()) > 0){
+            int priority = Integer.parseInt(calorprioritylabel.getText());
+            calorprioritylabel.setText(Integer.toString(priority-1));
+            hilocalor.setPriority(priority-1);
+        }
+    }//GEN-LAST:event_calormenosprioridadActionPerformed
 
     /**
      * @param args the command line arguments
