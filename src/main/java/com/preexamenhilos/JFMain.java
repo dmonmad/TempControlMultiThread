@@ -23,6 +23,8 @@ public class JFMain extends javax.swing.JFrame {
 
         hilocalor = new hilocalefactor(jLabel2, jLabel6);
         hilofrio = new hilorefrigerador(jLabel2, jLabel6);
+        hilocalor.setHiloRefrigerador(hilofrio);
+        hilofrio.setHiloCalefactor(hilocalor);
 
 //        while(true){
 //            synchronized(hilocalor){
@@ -61,14 +63,14 @@ public class JFMain extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        friomasprioridad = new javax.swing.JButton();
+        friomenosprioridad = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        calormasprioridad = new javax.swing.JButton();
+        calormenosprioridad = new javax.swing.JButton();
+        frioprioritylabel = new javax.swing.JLabel();
+        calorprioritylabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,20 +139,25 @@ public class JFMain extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Prioridad:");
 
-        jButton7.setText("+");
+        friomasprioridad.setText("+");
+        friomasprioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                friomasprioridadActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("-");
+        friomenosprioridad.setText("-");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Prioridad:");
 
-        jButton9.setText("+");
+        calormasprioridad.setText("+");
 
-        jButton10.setText("-");
+        calormenosprioridad.setText("-");
 
-        jLabel9.setText("jLabel9");
+        frioprioritylabel.setText("jLabel9");
 
-        jLabel10.setText("jLabel10");
+        calorprioritylabel.setText("jLabel10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,13 +181,13 @@ public class JFMain extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton9)
+                                        .addComponent(calormasprioridad)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton10))
+                                        .addComponent(calormenosprioridad))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)))
+                                        .addComponent(calorprioritylabel)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,13 +219,13 @@ public class JFMain extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton7)
+                                                .addComponent(friomasprioridad)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton8))
+                                                .addComponent(friomenosprioridad))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel9)))
+                                                .addComponent(frioprioritylabel)))
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addContainerGap())))
         );
@@ -250,11 +257,11 @@ public class JFMain extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel9))
+                            .addComponent(frioprioritylabel))
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jButton8))))
+                            .addComponent(friomasprioridad)
+                            .addComponent(friomenosprioridad))))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -270,11 +277,11 @@ public class JFMain extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel10))
+                            .addComponent(calorprioritylabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton9)
-                            .addComponent(jButton10))))
+                            .addComponent(calormasprioridad)
+                            .addComponent(calormenosprioridad))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -293,10 +300,14 @@ public class JFMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void startCalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startCalorActionPerformed
-        if (!hilocalor.isStopped()) {
+        if (!hilocalor.isPaused()) {
             if (!hilocalor.isAlive()) {
                 System.out.println("START CALOR");
                 hilocalor.start();
+            }else{
+                synchronized(hilocalor){
+                    hilocalor.notifyAll();
+                }
             } 
 
         }else {
@@ -307,27 +318,41 @@ public class JFMain extends javax.swing.JFrame {
 
     private void startFrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startFrioActionPerformed
 
-        if (!hilofrio.isStopped()) {
+        if (!hilofrio.isPaused()) {
             if (!hilofrio.isAlive()) {
                 hilofrio.start();
-            } 
+                System.out.println("START FRIO");
+            } else{
+                synchronized(hilofrio){
+                    hilofrio.notifyAll();
+                }
+            }
 
         }else {
                 hilofrio.resumeThread();
+                System.out.println("RESUME FRIO");
             }
     }//GEN-LAST:event_startFrioActionPerformed
 
     private void stopFrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopFrioActionPerformed
-        if (!hilofrio.isStopped()) {
-            hilofrio.stopthread();
+        if (!hilofrio.isPaused()) {
+            hilofrio.pauseThread();
         }
     }//GEN-LAST:event_stopFrioActionPerformed
 
     private void stopCalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopCalorActionPerformed
-        if (!hilocalor.isStopped()) {
-            hilocalor.stopthread();
+        if (!hilocalor.isPaused()) {
+            hilocalor.pauseThread();
         }
     }//GEN-LAST:event_stopCalorActionPerformed
+
+    private void friomasprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friomasprioridadActionPerformed
+        if(Integer.parseInt(frioprioritylabel.getText()) < 10){
+            
+            hilocalor.setPriority(Integer.parseInt(frioprioritylabel.getText()));
+        }
+        
+    }//GEN-LAST:event_friomasprioridadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,22 +390,22 @@ public class JFMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton calormasprioridad;
+    private javax.swing.JButton calormenosprioridad;
+    private javax.swing.JLabel calorprioritylabel;
+    private javax.swing.JButton friomasprioridad;
+    private javax.swing.JButton friomenosprioridad;
+    private javax.swing.JLabel frioprioritylabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
+    private volatile javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private volatile javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

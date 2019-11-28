@@ -14,64 +14,67 @@ import javax.swing.JLabel;
  */
 public class hilorefrigerador extends Thread {
 
-    JLabel deseada;
-    JLabel actual;
-    
-    boolean running;
+    private volatile JLabel deseada;
+    private volatile JLabel actual;
 
-    private volatile boolean exit = false;
+    private volatile hilocalefactor hc;
+
+    private volatile boolean isRunning = true;
+    private volatile boolean paused = false;
 
     public hilorefrigerador(JLabel deseada, JLabel actual) {
 
         this.deseada = deseada;
         this.actual = actual;
-
     }
 
-    public void run() {
+    public synchronized void run() {
 
-        while (true) {
-            if (!exit) {
-                System.out.println("Hilo frio -1");
-
+        while (isRunning) {
+            System.out.println("WHILE #FRIO");
+            
                 int tempdes = Integer.parseInt(deseada.getText());
                 int tempact = Integer.parseInt(actual.getText());
                 System.out.println(Integer.toString(tempact - 1));
                 actual.setText(Integer.toString(tempact - 1));
-//            if(tempact > tempdes+5){
-//                try {
-//                    wait();
-//                } catch (Exception e) {
-//                }
-//                
-//            }
+                System.out.println("IF #FRIO");
 
-                try {
-                    sleep(500);
-                } catch (Exception e) {
+                if (tempact <= tempdes - 5) {
+                    System.out.println("###FRIO TEMP ACT " + tempact + " / " + tempdes);
+                    System.out.println("PAUSE #FRIO");
+                    synchronized (hc) {
+                        hc.notifyAll();
+                    }
+                    try {
+                        System.out.println("WAIT #FRIO");
+                        wait();
+                    } catch (Exception e) {
+                    }
                 }
-
-            }else{
-                while(exit){
-                    try{
-                    wait();
-                }
-                
-            }
             
+
+            try {
+                Thread.sleep(200);
+            } catch (Exception e) {
+
+            }
         }
 
     }
 
-    public void stopthread() {
-        exit = true;
+    public void pauseThread() {
+        paused = true;
     }
 
     public void resumeThread() {
-        exit = false;
+        paused = false;
     }
 
-    public boolean isStopped() {
-        return this.exit;
+    public boolean isPaused() {
+        return this.paused;
+    }
+
+    public void setHiloCalefactor(hilocalefactor hc) {
+        this.hc = hc;
     }
 }

@@ -13,10 +13,13 @@ import javax.swing.JLabel;
  */
 public class hilocalefactor extends Thread {
 
-    JLabel deseada;
-    JLabel actual;
+    private volatile JLabel deseada;
+    private volatile JLabel actual;
 
-    private volatile boolean exit = false;
+    private volatile hilorefrigerador hr;
+
+    private volatile boolean isRunning = true;
+    private volatile boolean paused = false;
 
     public hilocalefactor(JLabel deseada, JLabel actual) {
 
@@ -25,42 +28,53 @@ public class hilocalefactor extends Thread {
 
     }
 
-    public void run() {
+    public synchronized void run() {
 
-        while (true) {
-            if (!exit) {
-                System.out.println("Hilo calor +1");
+        while (isRunning) {
+            System.out.println("While CALOR");
+            if (!paused) {
                 int tempdes = Integer.parseInt(deseada.getText());
                 int tempact = Integer.parseInt(actual.getText());
-
+                System.out.println(Integer.toString(tempact + 1));
                 actual.setText(Integer.toString(tempact + 1));
+                System.out.println("IF CALOR");
 
-//            if(tempact > tempdes+5){
-//                try {
-//                    wait();
-//                } catch (Exception e) {
-//                }
-//                
-//            }
-                try {
-                    sleep(500);
-                } catch (Exception e) {
+                if (tempact >= tempdes + 5) {
+                    System.out.println("---CALOR TEMP ACT " + tempact + " / " + tempdes);
+                    System.out.println("PAUSE THREAD CALOR");
+                    synchronized (hr) {
+                        hr.notifyAll();
+                    }
+                    try {
+                        System.out.println("WAIT CALOR");
+                        wait();
+                    } catch (Exception e) {
+                    }
                 }
+            }
+            
+            try {
+                Thread.sleep(200);
+            } catch (Exception e) {
 
             }
         }
 
     }
 
-    public void stopthread() {
-        exit = true;
+    public void pauseThread() {
+        paused = true;
     }
 
     public void resumeThread() {
-        exit = false;
+        paused = false;
     }
 
-    public boolean isStopped() {
-        return this.exit;
+    public boolean isPaused() {
+        return this.paused;
+    }
+
+    public void setHiloRefrigerador(hilorefrigerador hr) {
+        this.hr = hr;
     }
 }
